@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ super() }} | Homepage{% endblock %}
+
+{% block app_content %}
+  <main>
+    <div class="row">
+      <div class="col-md-8">
+        <img src="/static/images/nza_slideshow.jpg" alt="Trees" />
+      </div> <!-- End image col -->
+      <div class="my-col-md-3">
+        <div class="side-bar" id="style-01">
+          <h5>News Feed</h5>
+          <p>Jeffrey Zorp and Frank Debolux obtained dismissal of two Japanese corporations after challenging personal jurisdiction in the Circuit Court of Cook County, Law Division.<br/><br/>Robert Metzger settled a building collapse claim in Roswell NM stemming from winter storm Goliath for policy limits.<br/><br/>Dominick Savaiano was nominated for the Lifetime Achievement award among America's Top 100 Attorneys® for Illinois.<br/><br/>In a 1983/Title IX claim brought against an Illinois school district and its administrators, Robert</p>
+        </div>
+      </div> <!-- End side bar -->
+    </div> <!-- End first row with image and content -->
+    <div class="row top-margin">
+      <div class="col-md-8">
+        <h6>Welcome to our website!</h6>
+        <p>Bigshot, Zoo & Adds, PC is a nationally recognized and respected law firm that offers its clients big firm experience and talent in a smaller firm environment. Our reputation is very important to us. We solve our client’s problems in some situations and prevent them all together in other situations. We welcome you to our website to learn more about us.</p>
+      </div>
+      <div class="my-col-md-3 company-info">
+        <p><span class="company-name">Bigshot, Zoo & Adds, P.C.</span><br/>
+        419 West South Street, Suite 4200<br/>
+        Houston, Texas 35983<br/>
+        332-332-8800 phone<br/>
+        332-332-7777 fax<br/>
+        <span class="email-link"><a href="mailto:me@me.com">me@lzblaw.com</a></span></p>
+      </div>
+    </div> <!-- End second row of main content -->
+  </main>
+{% endblock %}

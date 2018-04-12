@@ -1,0 +1,79 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}LZB Law{% endblock %}
+
+{% block navbar %}
+  <div class="wrapper">
+    <header>
+      <div class="row">
+        <div class="col-md-12">
+          <a href="/"><img class="logo" src="http://placehold.it/318x76" alt="Logo" /></a>
+          <div id="login-buttons">
+          {% if current_user.is_authenticated %}
+          <a href="{{ url_for('profile') }}">Profile</a>
+          <span class="log-vert-bar">&#124;</span>
+          <a href="{{ url_for('logout') }}">Logout</a>
+          {% else %}
+          <a href="{{ url_for('login') }}">Login</a>
+          <span class="log-vert-bar">&#124;</span>
+          <a href="{{ url_for('register') }}">Register</a>
+          {% endif %}
+          </div>
+          <nav>
+            <ul>
+              <li><a href="/whoweare">Who we are</a></li>
+              <span class="vert-bar">&#124;</span><li><a href="/what">What we do</a></li>
+              <span class="vert-bar">&#124;</span><li><a href="#">News & Events</a></li>
+              <span class="vert-bar">&#124;</span><li><a href="/where">Where we work</a></li>
+              <span class="vert-bar">&#124;</span><li><a href="/contact">Contact us</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div> <!-- End header row -->
+    </header>
+{% endblock %}
+
+{% block content %}
+    <!-- Start main content -->
+    <div class="row">
+      <div class="md-col-12">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-info col-md-6 col-md-offset-3">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <strong>{{ message }}</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block app_content %}{% endblock %}
+
+        <footer class="add-margin-top">
+          <div class="row">
+            <div class="col-md-12">
+              <ul class="footer-nav">
+                <li><a href="/whoweare">Who we are</a></li>
+                <span class="horizontal-bar">&#151;</span><li><a href="/what">What we do</a></li>
+                <span class="horizontal-bar">&#151;</span><li><a href="#">News & Events</a></li>
+                <span class="horizontal-bar">&#151;</span><li><a href="/where">Where we work</a></li>
+                <span class="horizontal-bar">&#151;</span><li><a href="/contact">Contact us</a></li>
+              </ul>
+            </div>
+          </div> <!-- End nav bar footer links row -->
+          <div class="row">
+            <div class="col-md-12">
+              <p class="copyright"><a href="#">©2018 Connor Milliken</a>
+                <!-- <span class="span-spacing">//</span><a href="#">Website Design by OneTen Creative</a> -->
+              </p>
+            </div>
+          </div> <!-- End copyright row -->
+        </footer>
+      </div>
+    </div> <!-- End section row -->
+  </div>
+
+  <link rel="stylesheet" type="text/css" href="../static/css/main.css">
+  <script src="../static/js/main.js"></script>
+{% endblock %}

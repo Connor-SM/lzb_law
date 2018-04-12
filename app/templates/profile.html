@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %}{{ super() }} | Profile{% endblock %}
+
+{% block app_content %}
+<script>
+  function editProfile() {
+    var x = document.getElementById("login-form");
+    if (x.style.display === "block") {
+        x.style.display = "none";
+    } else {
+        x.style.display = "block";
+    }
+  }
+</script>
+  <main>
+    <div class="row">
+      <div class="col-md-4">
+        <img class="profile-pic" src="http://placehold.it/250x300" alt="Profile Pic">
+      </div>
+      <div class="col-md-8">
+        <h3>
+          {{ current_user.first_name }} {{ current_user.last_name }}
+        </h3>
+        <h4>{{ current_user.email }}</h4>
+        {% if user_role.role.name == 'Admin' %}
+        <button id="admin_button" onclick="window.location.href='{{ url_for('admin') }}';">Admin Panel</button>
+        {% elif user_role.role.name == 'Partner' %}
+        <button id="portal_button" onclick="window.location.href='{{ url_for('portal') }}';">Partner Portal</button>
+        {% else %}
+        <p id="status_profile">Status: {{ user_role.role.name }}</p>
+        {% endif %}
+        <p id="edit-profile" onclick="editProfile()"><a href="#">Edit profile</a><p>
+      </div>
+      <div class="col-md-6 extra-top-padding" id="login-form">
+        <p>To change your information, use the form below...</p>
+        {{ wtf.quick_form(form) }}
+      </div>
+    </div>
+  </main>
+{% endblock %}

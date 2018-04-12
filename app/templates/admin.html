@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+{% block app_content %}
+
+  <!-- Form for changing user settings -->
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      {% if search_form != None %}
+        {{ wtf.quick_form(search_form) }}
+      {% elif update_form != None %}
+        {{ wtf.quick_form(update_form) }}
+      {% endif %}
+    </div>
+  </div>
+
+  {% if user != None %}
+    <div class="row">
+      <div class="col-md-10">
+        <meta id="my-data" data-fname="{{user.user.first_name}}" data-lname="{{ user.user.last_name }}" data-role="{{ user.role.id }}" data-u_id="{{ user.user.id }}">
+        <script src="../static/js/admin.js"></script>
+          <table class="user_table single_user_table">
+            <tr>
+              <th>ID</th>
+              <th>E-mail</th>
+              <th>Name</th>
+              <th>Role</th>
+            </tr>
+            <tr>
+              <td>{{ user.user.id }}</td>
+              <td>{{ user.user.email }}</td>
+              <td>{{ user.user.first_name + ' ' + user.user.last_name }}</td>
+              <td>{{ user.role.name }}</td>
+            </tr>
+          </table>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">
+        {{ wtf.quick_form(delete_form) }}
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- See all users -->
+  {% if user_roles != None %}
+    <div class="row">
+      <div class="col-md-10">
+        <button id="add_user_button" onclick="window.location.href='{{ url_for('admin_add') }}';">Add New User</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-10 table_limit">
+        <table class="user_table">
+          <tr>
+            <th>ID</th>
+            <th>E-mail</th>
+            <th>Name</th>
+            <th>Role</th>
+          </tr>
+          {% for user_role in user_roles %}
+            <tr>
+              <td>{{ user_role.user.id }}</td>
+              <td>{{ user_role.user.email }}</td>
+              <td>{{ user_role.user.first_name + ' ' + user_role.user.last_name }}</td>
+              <td>{{ user_role.role.name }}</td>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}
